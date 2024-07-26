@@ -1,29 +1,37 @@
-// import {heroes} from './data/heroes.js'
-import { heroes } from "./data/heroes";
-//Mi solución
-// const getHeroById = (id) =>{
-//     return heroes.find((valor)=> valor.id === id);
-// }
-const getHeroById = (id) => heroes.find((valor)=> valor.id === id);
+import { getHeroById} from "./bases/08-imp-exp";
 
-console.log(getHeroById(4));
-
-
-
-//Solución del Profesor
-// const getHerosById = (id) =>{
-//     return heroes.find((heroe)=> {
-//         if (heroe.id === id){
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     });
-// }
-// console.log(getHerosById(1));
+// const promesa = new Promise((resolve, reject)=>{
+//     setTimeout(()=>{
+//         // console.log('2 segundo despues');
+//         //resolve();
+//         /*Tarea
+//         importa el imp-exp
+//         */
+//         const p1 = getHeroById(2);
+//         resolve(p1);
+//         // console.log(heroe);
+//         // reject(p1)
+//         reject('No se pudo encontrar al heroe')
+//     }, 2000)
+// }); 
 
 
-// find() -> filter
-const getHeroByOwner =(owner) => heroes.filter((valor)=> valor.owner === owner);
+// promesa.then((heroe)=>{
+//     console.log('heroe', heroe);
+// })
+// .catch( err => console.warn( err ) );
 
-console.log(getHeroByOwner('DC'));
+const getHeroeByIdAsync = (id) => {
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            const p1 = getHeroById(id);
+            resolve(p1);
+            // console.log(heroe);
+            // reject(p1)
+            reject('No se pudo encontrar al heroe')
+        }, 2000)
+    });
+    // return promesa
+}
+
+getHeroeByIdAsync(1).then(heroe => console.log('Heroe', heroe));
